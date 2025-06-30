@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 import pages.ProductsPage;
+import pages.YourCartPage;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class BaseTest {
     SoftAssert softAssert;
     LoginPage loginPage;
     ProductsPage productsPage;
+    YourCartPage yourCartPage;
 
     @BeforeMethod
     public void setup() {
@@ -35,6 +37,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
+        yourCartPage = new YourCartPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)
