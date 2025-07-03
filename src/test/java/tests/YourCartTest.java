@@ -1,6 +1,5 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
@@ -29,8 +28,8 @@ public class YourCartTest extends BaseTest {
         // Залогиниться
         loginPage.login("standard_user", "secret_sauce");
         // Получить ожидаемую имя и цену продукта
-        yourCartPage.getExpectedNameProduct();
-        yourCartPage.getExpectedPriceProduct();
+        yourCartPage.expectedPriceProduct();
+        yourCartPage.expectedNameProduct();
 
         // Добавить товар в корзину
         yourCartPage.addProduct();
@@ -39,11 +38,11 @@ public class YourCartTest extends BaseTest {
         yourCartPage.openShoppingCart();
 
         // Проверить стоимость и имя товара в корзине
-        softAssert.assertEquals(driver.findElement(By.cssSelector(".inventory_item_name")).getText(),
-                yourCartPage.getExpectedNameProduct(),
+        softAssert.assertEquals(yourCartPage.getPriceProduct(),
+                yourCartPage.expectedPriceProduct(),
                 "Название товара не совпадает: ");
-        softAssert.assertEquals(driver.findElement(By.cssSelector(".inventory_item_price")).getText(),
-                yourCartPage.getExpectedPriceProduct(),
+        softAssert.assertEquals(yourCartPage.getNameProduct(),
+                yourCartPage.expectedNameProduct(),
                 "Цена не совпадает: ");
         softAssert.assertAll();
     }
@@ -68,7 +67,7 @@ public class YourCartTest extends BaseTest {
         yourCartPage.openShoppingCart();
 
         // Проверить иконку в корзине
-        softAssert.assertEquals(driver.findElement(By.cssSelector("[data-test=shopping-cart-badge]")).getText(),
+        softAssert.assertEquals(yourCartPage.getCartBadgeShopping(),
                 yourCartPage.getCartBadge(),
                 "Иконка корзины не совпадает: ");
         softAssert.assertAll();
@@ -122,8 +121,8 @@ public class YourCartTest extends BaseTest {
         // Залогиниться
         loginPage.login("standard_user", "secret_sauce");
         // Получить ожидаемую имя и цену продукта
-        yourCartPage.getExpectedNameProduct();
-        yourCartPage.getExpectedPriceProduct();
+        yourCartPage.expectedNameProduct();
+        yourCartPage.expectedPriceProduct();
 
         // Добавить товар в корзину
         yourCartPage.addProduct();

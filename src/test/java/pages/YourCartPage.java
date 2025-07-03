@@ -8,15 +8,13 @@ public class YourCartPage extends BasePage {
     private final By TITLE_YOUR_CART = By.cssSelector("[data-test=title]");
     private final By PRODUCT = By.cssSelector("[data-test^=add-to-cart]");
     private final By SHOPPING_CART = By.cssSelector("[data-test=shopping-cart-link]");
-    private final By EXPECTED_NAME_PRODUCT = By.cssSelector(".inventory_item_name");
-    private final By EXPECTED_PRICE_PRODUCT = By.cssSelector(".inventory_item_price");
+    private final By NAME_PRODUCT = By.cssSelector(".inventory_item_name");
+    private final By PRICE_PRODUCT = By.cssSelector(".inventory_item_price");
     private final By CART_BADGE = By.cssSelector("[data-test=shopping-cart-badge]");
     private final By BUTTON_CHECKOUT = By.cssSelector("[data-test=checkout]");
     private final By TITLE_CHECKOUT = By.cssSelector("[data-test=title]");
     private final By BUTTON_CONTINUE_SHOPPING = By.cssSelector("[data-test=continue-shopping]");
     private final By BUTTON_REMOVE_PRODUCT = By.cssSelector("[data-test=remove-sauce-labs-backpack]");
-
-
 
     public YourCartPage(WebDriver driver) {
         super(driver);
@@ -38,15 +36,27 @@ public class YourCartPage extends BasePage {
         driver.findElement(SHOPPING_CART).click();
     }
 
-    public String getExpectedNameProduct() {
-        return driver.findElement(EXPECTED_NAME_PRODUCT).getText();
+    public String expectedNameProduct() {
+        return driver.findElement(NAME_PRODUCT).getText();
     }
 
-    public String getExpectedPriceProduct() {
-        return driver.findElement(EXPECTED_PRICE_PRODUCT).getText();
+    public String expectedPriceProduct() {
+        return driver.findElement(PRICE_PRODUCT).getText();
+    }
+
+    public String getNameProduct() {
+        return driver.findElement(NAME_PRODUCT).getText();
+    }
+
+    public String getPriceProduct() {
+        return driver.findElement(PRICE_PRODUCT).getText();
     }
 
     public String getCartBadge() {
+        return driver.findElement(CART_BADGE).getText();
+    }
+
+    public String getCartBadgeShopping() {
         return driver.findElement(CART_BADGE).getText();
     }
 
