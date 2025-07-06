@@ -17,11 +17,13 @@ public class LoginPage extends BasePage {
 
     public void open() {
         driver.get(BASE_URL);
+        //waitForPageLoaded();
     }
 
     public void login(String user, String password) {
         driver.findElement(LOGIN_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
+        //clickJS(driver.findElement(LOGIN_BUTTON));
         driver.findElement(LOGIN_BUTTON).click();
     }
 

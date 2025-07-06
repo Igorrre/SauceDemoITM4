@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo SmokeTest" thread-count="2" parallel="tests">
+    <test name="Thread#1">
+        <groups>
+            <run>
+                <exclude name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.YourCartTest"/>
+            <class name="tests.LocatorsTest"/>
+        </classes>
+    </test>
+    <test name="Thread#2">
+        <groups>
+            <run>
+                <exclude name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.YourCartTest"/>
+            <class name="tests.LocatorsTest"/>
+        </classes>
+    </test>
+</suite>

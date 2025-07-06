@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo SmokeTest" thread-count="2" parallel="tests">
+    <test name="Chrome">
+        <groups>
+            <run>
+                <exclude name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.LoginTest">
+                <parameter name="browser" value="chrome">
+                </parameter>
+            </class>
+            <class name="tests.YourCartTest"/>
+            <class name="tests.LocatorsTest"/>
+        </classes>
+    </test>
+    <test name="Edge">
+        <!--        <groups>-->
+        <!--            <run>-->
+        <!--                <include name="smoke"/>-->
+        <!--            </run>-->
+        <!--        </groups>-->
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.YourCartTest"/>
+            <class name="tests.LocatorsTest"/>
+            <parameter name="browser" value="edge">
+            </parameter>
+        </classes>
+    </test>
+</suite>
