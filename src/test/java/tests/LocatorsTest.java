@@ -1,33 +1,14 @@
 package tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.util.HashMap;
-
-public class LocatorsTest {
-    @Test
+public class LocatorsTest extends BaseTest {
+    @Test(testName = "Проверка локаторов",
+            groups = {"smoke"})
     public void checkLocators() {
-        ChromeOptions options = new ChromeOptions();
-        //Создается карта настроек chromePrefs для хранения предпочтений браузера
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        //В карту добавляются параметры, отключающие менеджер паролей
-        chromePrefs.put("credentials_enable_service", false);//отключает сервис сохранения паролей
-        chromePrefs.put("profile.password_manager_enabled", false);//отключает встроенный менеджер паролей.
-        options.setExperimentalOption("prefs", chromePrefs);//предпочтения передаются браузеру
-        //Добавляются аргументы командной строки для запуска браузера
-        options.addArguments("--incognito");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-infobars");
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.get("https://www.saucedemo.com/");
 
         driver.findElement(By.className("login_logo"));

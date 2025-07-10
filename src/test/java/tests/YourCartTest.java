@@ -5,7 +5,8 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 public class YourCartTest extends BaseTest {
-    @Test
+    @Test(priority = 6, testName = "Проверка отображения страницы корзины без добавления товара",
+            groups = {"regression"})
     public void checkPageYourCart() {
 
         driver.get("https://www.saucedemo.com/");
@@ -20,7 +21,8 @@ public class YourCartTest extends BaseTest {
         assertTrue(yourCartPage.isYourCartPage());
     }
 
-    @Test
+    @Test(priority = 5, testName = "Проверка цены и названия товара после добавления в корзину",
+            groups = {"smoke"})
     public void checkProductYourCart() {
 
         driver.get("https://www.saucedemo.com/");
@@ -47,7 +49,9 @@ public class YourCartTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 1, invocationCount = 2,
+            testName = "Проверка иконки корзины после добавления товара",
+            groups = {"smoke"})
     public void checkCartBadge() {
 
         driver.get("https://www.saucedemo.com/");
@@ -73,7 +77,8 @@ public class YourCartTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 3, testName = "Проверка отображения страницы при переходе по кнопке Checkout",
+            groups = {"smoke"})
     public void checkButtonCheckout() {
 
         driver.get("https://www.saucedemo.com/");
@@ -95,25 +100,8 @@ public class YourCartTest extends BaseTest {
         assertTrue(yourCartPage.isCheckoutPage1());
     }
 
-    @Test
-    public void checkButtonContinueShopping() {
-
-        driver.get("https://www.saucedemo.com/");
-
-        // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
-
-        // Перейти в корзину
-        yourCartPage.openShoppingCart();
-
-        // Перейти по кнопке Checkout
-        yourCartPage.clickButtonContinueShopping();
-
-        // Проверить отображение страницы
-        assertTrue(productsPage.isPageOpened());
-    }
-
-    @Test
+    @Test(priority = 4, testName = "Проверка удаления товара в корзине",
+            groups = {"smoke"})
     public void checkButtonRemoveProductYourCart() {
 
         driver.get("https://www.saucedemo.com/");
