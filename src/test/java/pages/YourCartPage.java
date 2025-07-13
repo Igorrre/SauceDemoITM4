@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,20 +21,20 @@ public class YourCartPage extends BasePage {
         super(driver);
     }
 
-    public void openYourCartPage() {
-        driver.get(BASE_URL + "/cart.html");
-    }
-
     public boolean isYourCartPage() {
         return driver.findElement(TITLE_YOUR_CART).isDisplayed();
     }
 
+    @Step("Клик по кнопке добавить продукт в корзину")
     public void addProduct() {
         driver.findElement(PRODUCT).click();
+        //takeScreenshot(driver);
     }
 
+    @Step("Клик по кнопке корзины")
     public void openShoppingCart() {
         driver.findElement(SHOPPING_CART).click();
+        //takeScreenshot(driver);
     }
 
     public String expectedNameProduct() {
@@ -60,25 +61,30 @@ public class YourCartPage extends BasePage {
         return driver.findElement(CART_BADGE).getText();
     }
 
+    @Step("Клик по кнопке проверить в корзине")
     public void clickButtonCheckout() {
         driver.findElement(BUTTON_CHECKOUT).click();
+        //takeScreenshot(driver);
     }
 
     public void openCheckoutPage1() {
         driver.get(BASE_URL + "/checkout-step-one.html");
     }
 
-    public boolean isCheckoutPage1() {
+    public boolean isCheckoutPage() {
         return driver.findElement(TITLE_CHECKOUT).isDisplayed();
     }
 
+    @Step("Клик по кнопке вернуться к покупкам")
     public void clickButtonContinueShopping() {
         driver.findElement(BUTTON_CONTINUE_SHOPPING).click();
+        //takeScreenshot(driver);
     }
 
+    @Step("Клик по кнопке удалить продукт из корзины")
     public void removeButtonProduct() {
         driver.findElement(BUTTON_REMOVE_PRODUCT).click();
-
+        //takeScreenshot(driver);
     }
 
     public boolean isCartBadge() {

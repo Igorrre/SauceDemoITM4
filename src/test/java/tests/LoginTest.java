@@ -1,17 +1,28 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.*;
 
 public class LoginTest extends BaseTest {
 
     @Test(priority = 1,
             invocationCount = 2,
+            description = "Проверка входа в систему без пароля",
             testName = "Негативный тест логина без пароля",
             groups = {"smoke"})
+
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Igor")
+    @Link("https://www.saucedemo.com/")
+    @Epic("Login")
+    @Feature("Log in")
+    @Story("LoginWithoutPassword")
+    @TmsLink("ITM-4")
+    @Issue("ITM-4-1")
+    @Description("Проверка, что пользователь не может войти без пароля")
     public void checkLoginWithoutPassword() {
         loginPage.open();
         loginPage.login("standard_user", "");
@@ -21,6 +32,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(priority = 4,
+            description = "Проверка входа в систему без имени",
             groups = {"regression"},
             dependsOnMethods = {"checkLogin"})
     public void checkLoginWithoutUserName() {
@@ -46,12 +58,13 @@ public class LoginTest extends BaseTest {
 
     @Test(priority = 2,
             testName = "Позитивный тест логина",
+            description = "Проверка входа в систему с именем и паролем",
             timeOut = 5000,
             groups = {"regression"})
     public void checkLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertFalse(productsPage.isPageOpened());
+        assertTrue(productsPage.isPageOpened());
     }
 
     @DataProvider(name = "LoginData")
@@ -65,6 +78,7 @@ public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "LoginData",
             groups = {"smoke"},
+            description = "Проверка получения сообщений при различных способах входа",
             testName = "Негативный тест логина")
     public void checkLoginWithNegativeValue1(String user, String password, String expectedMessage) {
         loginPage.open();

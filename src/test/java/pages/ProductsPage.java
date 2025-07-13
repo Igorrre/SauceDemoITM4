@@ -11,10 +11,6 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
-    public void open() {
-        driver.get(BASE_URL + "/inventory.html");
-    }
-
     public boolean isPageOpened() {
         return driver.findElement(TITLE).isDisplayed();
     }
