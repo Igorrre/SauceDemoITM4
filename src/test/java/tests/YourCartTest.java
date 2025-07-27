@@ -3,9 +3,6 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
 public class YourCartTest extends BaseTest {
     @Test(priority = 5,
             description = "Проверка отображения страницы корзины",
@@ -22,13 +19,9 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка отображения страницы без товара")
     public void checkPageYourCart() {
 
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-
-        // Перейти в корзину
-        yourCartPage.openShoppingCart();
-        // Проверить отображение страницы
-        assertFalse(yourCartPage.isYourCartPage());
+        loginStep.authorisation("standard_user", "secret_sauce");
+        productsPage.openShoppingCart()
+                .isPageOpened();
     }
 
     @Test(priority = 4,
@@ -46,27 +39,14 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка цени и названия товара")
     public void checkProductYourCart() {
 
-        loginPage.open();
-        // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
-        // Получить ожидаемую имя и цену продукта
-        yourCartPage.expectedPriceProduct();
-        yourCartPage.expectedNameProduct();
-
-        // Добавить товар в корзину
-        yourCartPage.addProduct();
-
-        // Перейти в корзину
-        yourCartPage.openShoppingCart();
-
+        loginStep.authorisation("standard_user", "secret_sauce");
+                productsPage.addProduct()
+                .openShoppingCart()
+                .isPageOpened();
         // Проверить стоимость и имя товара в корзине
-        softAssert.assertEquals(yourCartPage.getPriceProduct(),
-                yourCartPage.expectedPriceProduct(),
-                "Название товара не совпадает: ");
-        softAssert.assertEquals(yourCartPage.getNameProduct(),
-                yourCartPage.expectedNameProduct(),
-                "Цена не совпадает: ");
-        softAssert.assertAll();
+        softAssert.assertEquals(yourCartPage.productDetails(),
+                productsPage.expectedProductDetails(),
+                "Название товара и цена не совпадает: ");
     }
 
     @Test(priority = 1,
@@ -85,27 +65,13 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка иконки корзины")
     public void checkCartBadge() {
 
-        loginPage.open();
-
-        // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
-
-        // Добавить товар в корзину
-        yourCartPage.addProduct();
-        // Получить иконку корзины с количеством
-        yourCartPage.getCartBadge();
-
-        // Добавить товар в корзину
-        yourCartPage.addProduct();
-
-        // Перейти в корзину
-        yourCartPage.openShoppingCart();
-
-        // Проверить иконку в корзине
-        softAssert.assertEquals(yourCartPage.getCartBadgeShopping(),
-                yourCartPage.getCartBadge(),
+        loginStep.authorisation("standard_user", "secret_sauce");
+        productsPage.addProduct()
+                .openShoppingCart()
+                .isPageOpened();
+        //Сравнение иконки корзины на главной странице и страницы корзины
+        softAssert.assertEquals(yourCartPage.getCartBadgeShopping(), productsPage.getCartBadge(),
                 "Иконка корзины не совпадает: ");
-        softAssert.assertAll();
     }
 
     @Test(priority = 3,
@@ -123,22 +89,12 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка перехода на страницу проверки товаров в корзине")
     public void checkButtonCheckout() {
 
-        loginPage.open();
-
-        // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
-
-        // Добавить товар в корзину
-        yourCartPage.addProduct();
-
-        // Перейти в корзину
-        yourCartPage.openShoppingCart();
-
-        // Перейти по кнопке Checkout
-        yourCartPage.clickButtonCheckout();
-
-        // Проверить отображение страницы
-        assertTrue(yourCartPage.isCheckoutPage());
+        loginStep.authorisation("standard_user", "secret_sauce");
+        productsPage.addProduct()
+                .openShoppingCart()
+                .isPageOpened()
+                .clickButtonCheckout()
+                .isPageOpened();
     }
 
     @Test(priority = 6,
@@ -156,21 +112,12 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка кнопки возврата на страницу покупок")
     public void checkButtonContinueShopping() {
 
-        loginPage.open();
-
-        // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
-
-        // Добавить товар в корзину
-        yourCartPage.addProduct();
-
-        // Перейти в корзину
-        yourCartPage.openShoppingCart();
-
-        //Вернуться к покупкам
-        yourCartPage.clickButtonContinueShopping();
-
-        // Проверить отображение страницы
-        assertTrue(productsPage.isPageOpened());
+        loginStep.authorisation("standard_user", "secret_sauce");
+        productsPage.isPageOpened()
+                .addProduct()
+                .openShoppingCart()
+                .isPageOpened()
+                .clickButtonContinueShopping()
+                .isPageOpened();
     }
 }

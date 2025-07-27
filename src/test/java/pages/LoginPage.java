@@ -1,13 +1,15 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
-import static tests.AllureUtils.takeScreenshot;
-
-
+@Log4j2
 public class LoginPage extends BasePage {
 
     private final By LOGIN_FIELD = By.id("user-name");
@@ -20,22 +22,37 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Открытие страницы логина")
-    public void open() {
+    public LoginPage open() {
+        log.info("Login open page");
         driver.get(BASE_URL);
         //takeScreenshot(driver);
         //waitForPageLoaded();
+        return this;
+    }
+
+    @Override
+    public LoginPage isPageOpened() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_FIELD));
+        } catch (TimeoutException e) {
+            log.error(e.getMessage());
+            Assert.fail("Page isn't open");
+        }
+        return this;
     }
 
     @Step("Вход в систему с именем пользователя {user} и паролем {password}")
-    public void login(String user, String password) {
+    public ProductsPage login(String user, String password) {
+        log.info("Authorization: {}, {}", user, password);
         driver.findElement(LOGIN_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
-        //clickJS(driver.findElement(LOGIN_BUTTON));
         driver.findElement(LOGIN_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     @Step("Проверка локаторов")
     public void locatorTest() {
+        log.info("Check locators");
         driver.findElement(By.className("login_logo"));
         driver.findElement(By.tagName("h4"));
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
@@ -97,13 +114,13 @@ public class LoginPage extends BasePage {
         driver.findElement(By.cssSelector(".primary_header .header_label"));
 
         //.class1.class2 Если элемент имеет сразу несколько классов
-        driver.findElement(By.cssSelector("[id=react-burger-menu-btn]")).click();
-        driver.findElement(By.cssSelector("[id=about_sidebar_link]")).click();
-        driver.findElement(By.cssSelector(".MuiContainer-root.MuiContainer-maxWidthXl.MuiContainer-disableGutters.css-1l45bh9"));
+//        driver.findElement(By.cssSelector("[id=react-burger-menu-btn]")).click();
+//        driver.findElement(By.cssSelector("[id=about_sidebar_link]")).click();
+//        driver.findElement(By.cssSelector(".MuiContainer-root.MuiContainer-maxWidthXl.MuiContainer-disableGutters.css-1l45bh9"));
     }
 
     public String getErrorMessage() {
-
+        log.info("Get message error");
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 }

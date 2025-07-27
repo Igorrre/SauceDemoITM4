@@ -4,7 +4,7 @@ import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
@@ -24,8 +24,9 @@ public class LoginTest extends BaseTest {
     @Issue("ITM-4-1")
     @Description("Проверка, что пользователь не может войти без пароля")
     public void checkLoginWithoutPassword() {
-        loginPage.open();
-        loginPage.login("standard_user", "");
+        loginPage.open()
+                .isPageOpened()
+                .login("standard_user", "");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Password is required",
                 "Сообщение не соответствует");
@@ -36,8 +37,9 @@ public class LoginTest extends BaseTest {
             groups = {"regression"},
             dependsOnMethods = {"checkLogin"})
     public void checkLoginWithoutUserName() {
-        loginPage.open();
-        loginPage.login("", "secret_sauce");
+        loginPage.open()
+                .isPageOpened()
+                .login("", "secret_sauce");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Username is required",
                 "Сообщение не соответствует");
@@ -45,12 +47,13 @@ public class LoginTest extends BaseTest {
 
 
     @Test(priority = 3,
-            description = "Проверка входа в систему по логин паролю",
+            description = "Проверка входа в систему по логину паролю",
             testName = "Негативный тест логина без пароля",
             groups = {"regression"})
     public void checkLoginWithNegativeValue() {
-        loginPage.open();
-        loginPage.login("test", "test");
+        loginPage.open()
+                .isPageOpened()
+                .login("test", "test");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Username and password do not match any user in this service",
                 "Сообщение не соответствует");
@@ -62,9 +65,7 @@ public class LoginTest extends BaseTest {
             timeOut = 5000,
             groups = {"regression"})
     public void checkLogin() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        assertTrue(productsPage.isPageOpened());
+        loginStep.authorisation("standard_user", "secret_sauce");
     }
 
     @DataProvider(name = "LoginData")
@@ -81,8 +82,9 @@ public class LoginTest extends BaseTest {
             description = "Проверка получения сообщений при различных способах входа",
             testName = "Негативный тест логина")
     public void checkLoginWithNegativeValue1(String user, String password, String expectedMessage) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage.open()
+                .isPageOpened()
+                .login(user, password);
         assertEquals(loginPage.getErrorMessage(),
                 expectedMessage,
                 "Сообщение не соответствует");
