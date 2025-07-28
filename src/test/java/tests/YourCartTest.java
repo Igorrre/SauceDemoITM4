@@ -23,12 +23,12 @@ public class YourCartTest extends BaseTest {
     public void checkPageYourCart() {
 
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
 
         // Перейти в корзину
         yourCartPage.openShoppingCart();
         // Проверить отображение страницы
-        assertFalse(yourCartPage.isYourCartPage());
+        assertTrue(yourCartPage.isYourCartPage());
     }
 
     @Test(priority = 4,
@@ -48,7 +48,7 @@ public class YourCartTest extends BaseTest {
 
         loginPage.open();
         // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         // Получить ожидаемую имя и цену продукта
         yourCartPage.expectedPriceProduct();
         yourCartPage.expectedNameProduct();
@@ -88,7 +88,7 @@ public class YourCartTest extends BaseTest {
         loginPage.open();
 
         // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
 
         // Добавить товар в корзину
         yourCartPage.addProduct();
@@ -126,7 +126,7 @@ public class YourCartTest extends BaseTest {
         loginPage.open();
 
         // Залогиниться
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
 
         // Добавить товар в корзину
         yourCartPage.addProduct();
