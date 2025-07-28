@@ -86,7 +86,7 @@ public class LoginTest extends BaseTest {
             groups = {"smoke"},
             description = "Проверка получения сообщений при различных способах входа",
             testName = "Негативный тест логина")
-    public void checkLoginWithNegativeValue1(String expectedMessage) {
+    public void checkLoginWithNegativeValue1(String user,String password, String expectedMessage) {
         loginPage.open()
                 .isPageOpened()
                 .login(user, password);
