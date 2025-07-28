@@ -43,6 +43,7 @@ public class YourCartTest extends BaseTest {
                 productsPage.addProduct()
                 .openShoppingCart()
                 .isPageOpened();
+
         // Проверить стоимость и имя товара в корзине
         softAssert.assertEquals(yourCartPage.productDetails(),
                 productsPage.expectedProductDetails(),

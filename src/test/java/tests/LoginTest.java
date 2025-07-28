@@ -24,9 +24,11 @@ public class LoginTest extends BaseTest {
     @Issue("ITM-4-1")
     @Description("Проверка, что пользователь не может войти без пароля")
     public void checkLoginWithoutPassword() {
+
         loginPage.open()
                 .isPageOpened()
                 .login(user, "");
+
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Password is required",
                 "Сообщение не соответствует");
@@ -37,9 +39,11 @@ public class LoginTest extends BaseTest {
             groups = {"regression"},
             dependsOnMethods = {"checkLogin"})
     public void checkLoginWithoutUserName() {
+
         loginPage.open()
                 .isPageOpened()
                 .login("", password);
+
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Username is required",
                 "Сообщение не соответствует");
@@ -65,6 +69,7 @@ public class LoginTest extends BaseTest {
             timeOut = 5000,
             groups = {"regression"})
     public void checkLogin() {
+
         loginStep.authorisation(user, password);
     }
 
