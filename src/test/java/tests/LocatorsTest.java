@@ -8,8 +8,6 @@ public class LocatorsTest extends BaseTest {
             groups = {"smoke"})
     public void checkLocators() {
 
-        loginPage.open();
-        loginPage.login(user, password);
-        loginPage.locatorTest();
+        loginPage.locatorTest(user, password);
     }
 }

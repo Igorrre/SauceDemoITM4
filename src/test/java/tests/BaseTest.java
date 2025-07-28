@@ -11,9 +11,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
+import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductsPage;
 import pages.YourCartPage;
+import steps.LoginStep;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -29,8 +31,10 @@ public class BaseTest {
     ProductsPage productsPage;
     YourCartPage yourCartPage;
 
-    String user = System.getProperty("user");
-    String password = System.getProperty("password");
+    String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    String password = System.getProperty("password", PropertyReader.getProperty("password"));
+    CheckoutPage checkoutPage;
+    LoginStep loginStep;
 
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true, description = "Настройка драйвера")
@@ -59,6 +63,8 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         yourCartPage = new YourCartPage(driver);
+        checkoutPage = new CheckoutPage(driver);
+        loginStep = new LoginStep(driver);
     }
 
     @AfterMethod(alwaysRun = true, description = "Закрытие браузера")
@@ -67,6 +73,7 @@ public class BaseTest {
             takeScreenshot(driver);
         }
         if (driver != null) {
+            softAssert.assertAll();
             driver.quit();
         }
     }
