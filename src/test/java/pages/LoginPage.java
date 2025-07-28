@@ -51,12 +51,12 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Проверка локаторов")
-    public void locatorTest() {
+    public void locatorTest(String user, String password) {
         log.info("Check locators");
         driver.findElement(By.className("login_logo"));
         driver.findElement(By.tagName("h4"));
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.name("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("user-name")).sendKeys(user);
+        driver.findElement(By.name("password")).sendKeys(password);
         driver.findElement(By.cssSelector("[value=Login]")).click();
         driver.findElement(By.linkText("Sauce Labs Backpack")); //ищет только в тегах "/а"
         driver.findElement(By.partialLinkText("Backpack"));//ищет только в тегах "/а"

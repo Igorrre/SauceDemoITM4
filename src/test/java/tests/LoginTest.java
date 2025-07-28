@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithoutPassword() {
         loginPage.open()
                 .isPageOpened()
-                .login("standard_user", "");
+                .login(user, "");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Password is required",
                 "Сообщение не соответствует");
@@ -39,7 +39,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithoutUserName() {
         loginPage.open()
                 .isPageOpened()
-                .login("", "secret_sauce");
+                .login("", password);
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Username is required",
                 "Сообщение не соответствует");
@@ -65,7 +65,7 @@ public class LoginTest extends BaseTest {
             timeOut = 5000,
             groups = {"regression"})
     public void checkLogin() {
-        loginStep.authorisation("standard_user", "secret_sauce");
+        loginStep.authorisation(user, password);
     }
 
     @DataProvider(name = "LoginData")
@@ -81,7 +81,7 @@ public class LoginTest extends BaseTest {
             groups = {"smoke"},
             description = "Проверка получения сообщений при различных способах входа",
             testName = "Негативный тест логина")
-    public void checkLoginWithNegativeValue1(String user, String password, String expectedMessage) {
+    public void checkLoginWithNegativeValue1(String expectedMessage) {
         loginPage.open()
                 .isPageOpened()
                 .login(user, password);

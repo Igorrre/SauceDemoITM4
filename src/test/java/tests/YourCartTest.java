@@ -19,7 +19,7 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка отображения страницы без товара")
     public void checkPageYourCart() {
 
-        loginStep.authorisation("standard_user", "secret_sauce");
+        loginStep.authorisation(user, password);
         productsPage.openShoppingCart()
                 .isPageOpened();
     }
@@ -39,7 +39,7 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка цени и названия товара")
     public void checkProductYourCart() {
 
-        loginStep.authorisation("standard_user", "secret_sauce");
+        loginStep.authorisation(user, password);
                 productsPage.addProduct()
                 .openShoppingCart()
                 .isPageOpened();
@@ -65,7 +65,7 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка иконки корзины")
     public void checkCartBadge() {
 
-        loginStep.authorisation("standard_user", "secret_sauce");
+        loginStep.authorisation(user, password);
         productsPage.addProduct()
                 .openShoppingCart()
                 .isPageOpened();
@@ -89,7 +89,7 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка перехода на страницу проверки товаров в корзине")
     public void checkButtonCheckout() {
 
-        loginStep.authorisation("standard_user", "secret_sauce");
+        loginStep.authorisation(user, password);
         productsPage.addProduct()
                 .openShoppingCart()
                 .isPageOpened()
@@ -112,7 +112,7 @@ public class YourCartTest extends BaseTest {
     @Description("Проверка кнопки возврата на страницу покупок")
     public void checkButtonContinueShopping() {
 
-        loginStep.authorisation("standard_user", "secret_sauce");
+        loginStep.authorisation(user, password);
         productsPage.isPageOpened()
                 .addProduct()
                 .openShoppingCart()
