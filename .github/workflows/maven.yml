@@ -21,7 +21,7 @@ jobs:
 
     env:
       USER: ${(secrets.SD_USER)}
-      PASSWORD: ${(secrets.SD_PASSWORD)}
+      PASSWORD: ${(secrets.SD_PAASSWORD)}
 
     steps:
     - name: Checkout

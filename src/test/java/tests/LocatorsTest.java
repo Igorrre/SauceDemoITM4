@@ -9,6 +9,7 @@ public class LocatorsTest extends BaseTest {
     public void checkLocators() {
 
         loginPage.open()
+                .isPageOpened()
                 .locatorTest(user, password);
     }
 }
