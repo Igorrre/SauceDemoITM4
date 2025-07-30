@@ -31,8 +31,8 @@ public class BaseTest {
     ProductsPage productsPage;
     YourCartPage yourCartPage;
 
-    String user = PropertyReader.getProperty("user");
-    String password = PropertyReader.getProperty("password");
+    String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    String password = System.getProperty("password", PropertyReader.getProperty("password"));
     CheckoutPage checkoutPage;
     LoginStep loginStep;
 
