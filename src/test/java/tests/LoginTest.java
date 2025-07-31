@@ -51,7 +51,7 @@ public class LoginTest extends BaseTest {
 
 
     @Test(priority = 3,
-            description = "Проверка входа в систему по логину паролю",
+            description = "Негативный,проверка входа в систему по логину паролю",
             testName = "Негативный тест логина без пароля",
             groups = {"regression"})
     public void checkLoginWithNegativeValue() {
@@ -76,8 +76,8 @@ public class LoginTest extends BaseTest {
     @DataProvider(name = "LoginData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"standard_user", "", "Epic sadface: Password is required"},
-                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {user, "", "Epic sadface: Password is required"},
+                {"", password, "Epic sadface: Username is required"},
                 {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
         };
     }
