@@ -1,6 +1,5 @@
 package tests;
 
-import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -28,11 +27,11 @@ public class BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
     YourCartPage yourCartPage;
+    CheckoutPage checkoutPage;
+    LoginStep loginStep;
 
     String user = System.getProperty("user", PropertyReader.getProperty("user"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
-    CheckoutPage checkoutPage;
-    LoginStep loginStep;
 
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true, description = "Настройка драйвера")
